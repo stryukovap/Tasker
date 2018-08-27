@@ -1,45 +1,30 @@
+import Task from '/module_task.js';
+import {
+	getFormatedTimeNow
+} from '/module_clock.js'
 // debugger;
-var arrTasks = [{
-		id: 1,
-		dateStart: "08/16/2018 15:07:00",
-		dateEnd: "08/29/2018 19:59:00",
-	},
-	{
-		id: 2,
-		dateStart: "08/16/2018 15:07:00",
-		dateEnd: "08/17/2018 19:59:00",
-	},
-	{
-		id: 3,
-		dateStart: "08/16/2018 15:07:00",
-		dateEnd: "08/30/2018 16:43:00",
-	}
-];
+var arrTasks = [];
+var task1 = new Task("Home",
+	"Lorem ipsum dolor, sit amet consectetur adipisicing elit. Totam, quis?",
+	1);
+arrTasks.push(task1);
+var task2 = new Task("Work",
+	"Lorem ipsum dolor, sit amet consectetur adipisicing elit. Totam, quis?",
+	2);
+arrTasks.push(task2);
+var task3 = new Task("Home work",
+	"Lorem ipsum dolor, sit amet consectetur adipisicing elit. Totam, quis?",
+	3);
+arrTasks.push(task3);
 
 setInterval(function () {
 	insertTimeForHtml(getFormatedTimeNow());
 	insertStartedTaskForHtml(createArrayStartedTask(arrTasks));
 }, 1000);
 
-function correctTime(item) {
-	if (item < 10) {
-		item = `0${item}`;
-	};
-	return item;
-};
-
-function getFormatedTimeNow() {
-	var now = new Date();
-	var hours = correctTime(now.getHours());
-	var minutes = correctTime(now.getMinutes());
-	var seconds = correctTime(now.getSeconds());
-	var formatedTime = `${hours}:${minutes}:${seconds}`;
-	return formatedTime;
-};
-
 function insertTimeForHtml(time) {
 	var clockDiv = document.getElementById('clock');
-	var timeForHtml = `<h3 style="border:1px solid red; font-size:50px; text-align: center;">${time}</h3>`;
+	var timeForHtml = `<h4 style="font-size:50px; text-align: center;">${time}</h4>`;
 	clockDiv.innerHTML = timeForHtml;
 };
 
@@ -55,16 +40,12 @@ function insertStartedTaskForHtml(arr) {
 function createArrayStartedTask(arr) {
 	var arrTasksStarted = [];
 	arr.forEach(function (item) {
-		if (checkDateAndTimeTask(item)) {
-			arrTasksStarted.push(`<li style=font-size:30px;>Task # ${item.id} Started</li>`);
+		if (item.checkDateAndTimeTask()) {
+			arrTasksStarted.push(`<li><p style=font-size:30px;>Task # ${item.title} Started</p>
+			<p style=font-size:20px;>Descripton: ${item.description}</p>
+			<p style=font-size:15px;>Task started: ${item.start}</p>
+			<p style=font-size:15px;>Task ended: ${item.end}</p></li>`);
 		};
 	});
 	return arrTasksStarted;
-};
-
-function checkDateAndTimeTask(item) {
-	var time = new Date();
-	var dateStart = new Date(item.dateStart);
-	var dateEnd = new Date(item.dateEnd);
-	return (dateStart < time && dateEnd > time) ? true:false;
 };
