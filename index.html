@@ -6,11 +6,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <style>
+        *{
+            font-size: 14px;
+        }
+        #clock, #tasksInQueue, #todayTasks, #weekTasks, #expiredTasks{
+            border: 1px solid black;
+            min-height: 50px;
+            width: 150px;
+        }
+        #clock{
+            text-align: center;
+        }
+    .wrapper__clock{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .wrapper__tasks{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;  
+    }
+    .wrapper__all{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+    </style>
 </head>
 
 <body>
-    <div id="clock"></div>
-    <ul id="tasks"></ul>
+    <div class="wrapper__all">
+        <div class="wrapper__clock">
+            <div id="clock"></div>
+            <ul id="tasksInQueue"></ul>
+        </div>
+        <div class="wrapper__tasks">
+            <ul id="todayTasks"></ul>
+            <ul id="weekTasks"></ul>
+            <ul id="expiredTasks"></ul>
+        </div>
+    </div>
 </body>
 <script src="index.js" type="module">
 </script>
