@@ -29,48 +29,52 @@ Task.prototype.update = function () {
 	this.checkTaskInQueue();
 	this.checkExpiredTask();
 }
+Task.prototype.clearUls = function () {
+	var tasksInQueueUl = document.getElementById('tasksInQueue');
+	var tasksTodayUl = document.getElementById('todayTasks');
+	var taskWeekUl = document.getElementById('weekTasks');
+	var taskExpiredUl = document.getElementById('expiredTasks');
+	tasksInQueueUl.innerHTML = "";
+	tasksTodayUl.innerHTML = "";
+	taskWeekUl.innerHTML = "";
+	taskExpiredUl.innerHTML = "";
+}
 Task.prototype.startTimer = function () {
 	var self = this;
 	self.update();
 	self.timeoutId = setInterval(function () {
+		self.clearUls();
 		self.update();
 		self.insertForHtml();
-	}, 1000*5);
+	}, 1000 * 5);
 }
+Task.prototype.formatTaskForHtml = function () {
+	var formatedDateTimeStart = this.formatDateTime(this.start);
+	var formatedDateTimeEnd = this.formatDateTime(this.end);
+	var taskLi = document.createElement('li');
+	taskLi.innerHTML = `<p>${this.title}</p>
+		<p>${this.description}</p>
+		<p>${formatedDateTimeStart}</p>
+		<p>${formatedDateTimeEnd}</p>`;
+	return taskLi;
+}
+
 Task.prototype.insertForHtml = function () {
 	var tasksInQueueUl = document.getElementById('tasksInQueue');
 	var tasksTodayUl = document.getElementById('todayTasks');
 	var taskWeekUl = document.getElementById('weekTasks');
 	var taskExpiredUl = document.getElementById('expiredTasks');
-	var formatedDateTimeStart = this.formatDateTime(this.start);
-	var formatedDateTimeEnd = this.formatDateTime(this.end);
 	if (this.taskInQueue) {
-		var taskLi = `<p>${this.title}</p>
-		<p>${this.description}</p>
-		<p>${formatedDateTimeStart}</p>
-		<p>${formatedDateTimeEnd}</p>`;
-		tasksInQueueUl.innerHTML = taskLi;
+		tasksInQueueUl.appendChild(this.formatTaskForHtml());
 	}
 	if (this.todayTask) {
-		var taskLi = `<p>${this.title}</p>
-		<p>${this.description}</p>
-		<p>${formatedDateTimeStart}</p>
-		<p>${formatedDateTimeEnd}</p>`;
-		tasksTodayUl.innerHTML = taskLi;
+		tasksTodayUl.appendChild(this.formatTaskForHtml());
 	}
 	if (this.weekTask) {
-		var taskLi = `<p>${this.title}</p>
-		<p>${this.description}</p>
-		<p>${formatedDateTimeStart}</p>
-		<p>${formatedDateTimeEnd}</p>`;
-		taskWeekUl.innerHTML = taskLi;
+		taskWeekUl.appendChild(this.formatTaskForHtml());
 	}
 	if (this.expiredTask) {
-		var taskLi = `<p>${this.title}</p>
-		<p>${this.description}</p>
-		<p>${formatedDateTimeStart}</p>
-		<p>${formatedDateTimeEnd}</p>`;
-		taskExpiredUl.innerHTML = taskLi;
+		taskExpiredUl.appendChild(this.formatTaskForHtml());
 	}
 }
 Task.prototype.stopTimer = function () {
