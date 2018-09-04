@@ -9,14 +9,22 @@ for (var i = 1; i < 10; i++) {
 	var start = `09/0${i}/2018 10:00:00`;
 	var end = `09/0${i}/2018 20:00:00`;
 	var urgent = true;
-	arrTasks[i-1] = new Task(title, description, urgent, start, end);
+	arrTasks[i - 1] = new Task(title, description, urgent, start, end);
 }
 console.log(arrTasks);
-arrTasks.forEach(function (item) {
-	item.startTimer();
-	// item.insertForHtml();
-	// console.log(item);
-})
+var check = setInterval(function () {
+	var tasksInQueueUl = document.getElementById('tasksInQueue');
+	var tasksTodayUl = document.getElementById('todayTasks');
+	var taskWeekUl = document.getElementById('weekTasks');
+	var taskExpiredUl = document.getElementById('expiredTasks');
+	tasksInQueueUl.innerHTML = "";
+	tasksTodayUl.innerHTML = "";
+	taskWeekUl.innerHTML = "";
+	taskExpiredUl.innerHTML = "";
+	arrTasks.forEach(function (item) {
+		item.startTimer();
+	})
+}, 5000);
 
 var watch = new Clock('clock');
 watch.startTimer();

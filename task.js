@@ -2,15 +2,6 @@ import {
 	correctFirstZero
 } from '/clock.js'
 
-/**
- * Задача. В колонке "Tasks in Queue" выводить те, которые находятся в очереди, но не в сегодняшних тасках.
-Сегодняшние (Today tasks) - соответственно.
-Week tasks - те, что должны быть выполнены или хотя бы начаты на этой неделе.
-Expired - те, что уже закончились.
-Кружочек - это срочность таска. Он может быть срочный и не очень)
-Показываем срочность при помощи цвета кружочка 
- */
-
 export default function Task(title, description, urgent, start, end) {
 	this.title = title;
 	this.description = description;
@@ -29,23 +20,13 @@ Task.prototype.update = function () {
 	this.checkTaskInQueue();
 	this.checkExpiredTask();
 }
-Task.prototype.clearUls = function () {
-	var tasksInQueueUl = document.getElementById('tasksInQueue');
-	var tasksTodayUl = document.getElementById('todayTasks');
-	var taskWeekUl = document.getElementById('weekTasks');
-	var taskExpiredUl = document.getElementById('expiredTasks');
-	tasksInQueueUl.innerHTML = "";
-	tasksTodayUl.innerHTML = "";
-	taskWeekUl.innerHTML = "";
-	taskExpiredUl.innerHTML = "";
-}
 Task.prototype.startTimer = function () {
 	var self = this;
 	self.update();
 	self.timeoutId = setInterval(function () {
-		self.clearUls();
 		self.update();
 		self.insertForHtml();
+		self.stopTimer();
 	}, 1000 * 5);
 }
 Task.prototype.formatTaskForHtml = function () {
