@@ -74,13 +74,10 @@ Task.prototype.formatDateTime = function (date) {
 }
 Task.prototype.checkTodayTask = function () {
 	var now = new Date();
-	var diff = new Date(now - this.start);
-	var days = (+diff / (1000 * 60 * 60 * 24));
-	// console.log(days);
-	this.todayTask = (days < 1) &&
-		(days > 0) &&
-		this.end > now &&
-		this.start < now ? true : false;
+	this.todayTask = now.getFullYear() === this.start.getFullYear() &&
+		now.getDay() === this.start.getDay() &&
+		now.getMonth() === this.start.getMonth() &&
+		this.end > now ? true : false;
 	// console.log("this.todayTask " + this.todayTask);
 }
 Task.prototype.checkWeekTask = function () {
