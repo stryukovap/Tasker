@@ -38,6 +38,31 @@
         justify-content: space-around;
         align-items: flex-start;
     }
+    li{
+        position: relative;
+    }
+    li.urgent ::before{
+        content: "";
+        display: block;
+        position: absolute;
+        top: 5px;
+        left: -20px;
+        width: 10px;
+        height: 10px;
+        background-color: red;
+        border-radius: 50%;
+    }
+    li.no-urgent ::before{
+        content: "";
+        display: block;
+        position: absolute;
+        top: 5px;
+        left: -20px;
+        width: 10px;
+        height: 10px;
+        background-color: green;
+        border-radius: 50%;
+    }
     </style>
 </head>
 
