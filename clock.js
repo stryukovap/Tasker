@@ -1,8 +1,8 @@
 export default function Clock(idElement) {
     var now = new Date();
-    this.hours = this.correctFirstZero(now.getHours());
-    this.minutes = this.correctFirstZero(now.getMinutes());
-    this.seconds = this.correctFirstZero(now.getSeconds());
+    this.hours = '';
+    this.minutes = '';
+    this.seconds = '';
     this.timeoutId = null;
     this.idElement = idElement;
 }
