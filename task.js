@@ -13,6 +13,7 @@ export default function Task(title, description, urgent, start, end) {
 	this.todayTask = this.checkTodayTask();
 	this.weekTask = this.checkWeekTask();
 	this.expiredTask = this.checkExpiredTask();
+	this.taskForHtml = this.formatTaskForHtml();
 };
 Task.prototype.update = function () {
 	this.checkTodayTask();
