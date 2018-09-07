@@ -21,6 +21,9 @@
         }
         #clock{
             text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
     .wrapper__clock{
         display: flex;
@@ -39,19 +42,27 @@
         align-items: flex-start;
     }
     .virtual{
+        margin-top: 30px;
         display: flex;
         justify-content: space-around;
         align-items: flex-start;
     }
+    ul > p{
+        margin-top: 15px;
+        margin-bottom: 15px;
+        font-weight: bold;
+    }
     li{
         position: relative;
+        margin-top: 5px;
+        margin-bottom: 5px;
     }
     li.urgent ::before{
         content: "";
         display: block;
         position: absolute;
         top: 5px;
-        left: -20px;
+        left: -16px;
         width: 10px;
         height: 10px;
         background-color: red;
@@ -62,7 +73,7 @@
         display: block;
         position: absolute;
         top: 5px;
-        left: -20px;
+        left: -16px;
         width: 10px;
         height: 10px;
         background-color: green;
@@ -75,12 +86,12 @@
     <div class="wrapper__all">
         <div class="wrapper__clock">
             <div id="clock"></div>
-            <div>
+            <!-- <div>
                 <p>tasksInQueue</p>
                 <ul id="tasksInQueue"></ul>
-            </div>
+            </div> -->
         </div>
-        <div class="wrapper__tasks">
+        <!-- <div class="wrapper__tasks">
             <div>
                 <p>todayTasks</p>
                 <ul id="todayTasks"></ul>
@@ -93,7 +104,7 @@
                 <p>expiredTasks</p>
                 <ul id="expiredTasks"></ul>
             </div>
-        </div>
+        </div> -->
     </div>
     <div id="app"></div>
 </body>

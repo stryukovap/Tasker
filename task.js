@@ -21,15 +21,6 @@ Task.prototype.update = function () {
 	this.checkTaskInQueue();
 	this.checkExpiredTask();
 }
-Task.prototype.startTimer = function () {
-	var self = this;
-	// self.update();
-	// self.timeoutId = setInterval(function () {
-	self.update();
-	self.insertForHtml();
-	// self.stopTimer();
-	// }, 1000);
-}
 Task.prototype.formatTaskForHtml = function () {
 	var formatedDateTimeStart = this.formatDateTime(this.start);
 	var formatedDateTimeEnd = this.formatDateTime(this.end);
@@ -40,28 +31,6 @@ Task.prototype.formatTaskForHtml = function () {
 		<p>${formatedDateTimeStart}</p>
 		<p>${formatedDateTimeEnd}</p>`;
 	return taskLi;
-}
-
-Task.prototype.insertForHtml = function () {
-	var tasksInQueueUl = document.getElementById('tasksInQueue');
-	var tasksTodayUl = document.getElementById('todayTasks');
-	var taskWeekUl = document.getElementById('weekTasks');
-	var taskExpiredUl = document.getElementById('expiredTasks');
-	if (this.taskInQueue) {
-		tasksInQueueUl.appendChild(this.formatTaskForHtml());
-	}
-	if (this.todayTask) {
-		tasksTodayUl.appendChild(this.formatTaskForHtml());
-	}
-	if (this.weekTask) {
-		taskWeekUl.appendChild(this.formatTaskForHtml());
-	}
-	if (this.expiredTask) {
-		taskExpiredUl.appendChild(this.formatTaskForHtml());
-	}
-}
-Task.prototype.stopTimer = function () {
-	clearInterval(this.timeoutId);
 }
 Task.prototype.formatDateTime = function (date) {
 	var now = date ? date : new Date();
@@ -79,32 +48,25 @@ Task.prototype.checkTodayTask = function () {
 		now.getDay() === this.start.getDay() &&
 		now.getMonth() === this.start.getMonth() &&
 		this.end > now ? true : false;
-	// console.log("this.todayTask " + this.todayTask);
 }
 Task.prototype.checkWeekTask = function () {
 	var now = new Date();
 	now.setMilliseconds(1000 * 60 * 60 * 24 * 7);
 	var diff = new Date(now - this.start);
 	var days = (+diff / (1000 * 60 * 60 * 24));
-	// console.log(days);
 	this.weekTask = (days < 7) && (days > 0) ? true : false;
-	// console.log("this.weekTask " + this.weekTask);
 }
 Task.prototype.checkTaskInQueue = function () {
 	var now = new Date();
 	var diff = new Date(this.end - now);
 	var days = (+diff / (1000 * 60 * 60 * 24));
-	// console.log(days);
 	this.taskInQueue = (days > 0) ? true : false;
-	// console.log("this.taskInQueue " + this.taskInQueue);
 }
 Task.prototype.checkExpiredTask = function () {
 	var now = new Date();
 	var diff = new Date(this.end - now);
 	var days = (+diff / (1000 * 60 * 60 * 24));
-	// console.log(days);
 	this.expiredTask = (days < 0) || (this.end < now) ? true : false;
-	// console.log("this.expiredTask " + this.expiredTask);
 }
 
 function correctMonth(item) {

@@ -17,32 +17,17 @@ var schema = new Schema('tasksInQueue',
 	'todayTasks',
 	'weekTasks',
 	'expiredTasks');
-arrTasks.forEach(function (item) {
-	item.startTimer();
-});
-arrTasks.forEach(function (item) {
-	schema.appendTasks(item);
-});
-var app = document.getElementById('app');
-var appHtml = schema.insertInHtml();
-app.innerHTML = appHtml.outerHTML;
-console.log(schema);
-// schema.cleanElements();
-
-var check = setInterval(function () {
-	var tasksInQueueUl = document.getElementById('tasksInQueue');
-	var tasksTodayUl = document.getElementById('todayTasks');
-	var taskWeekUl = document.getElementById('weekTasks');
-	var taskExpiredUl = document.getElementById('expiredTasks');
-	tasksInQueueUl.innerHTML = "";
-	tasksTodayUl.innerHTML = "";
-	taskWeekUl.innerHTML = "";
-	taskExpiredUl.innerHTML = "";
+var virtualCheck = setInterval(function () {
+	schema.cleanElements();
+	schema.update();
 	arrTasks.forEach(function (item) {
-		item.startTimer();
-		// item.insertForHtml();
-	})
-}, 1000);
+		item.update();
+		schema.appendTasks(item);
+	});
+	var app = document.getElementById('app');
+	var appHtml = schema.insertInHtml();
+	app.innerHTML = appHtml.outerHTML;
+}, 1000)
 
 var watch = new Clock('clock');
 watch.startTimer();

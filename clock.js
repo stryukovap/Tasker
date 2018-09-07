@@ -1,5 +1,4 @@
 export default function Clock(idElement) {
-    var now = new Date();
     this.hours = '';
     this.minutes = '';
     this.seconds = '';
