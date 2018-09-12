@@ -1,6 +1,6 @@
 import {
 	correctFirstZero
-} from '/clock.js'
+} from './clock.js'
 
 export default function Task(title, description, urgent, start, end) {
 	this.title = title;

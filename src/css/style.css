@@ -1,0 +1,89 @@
+p,
+ul,
+li {
+    margin: 0;
+    /* padding: 0; */
+}
+
+* {
+    font-size: 14px;
+}
+
+#clock,
+#tasksInQueue,
+#todayTasks,
+#weekTasks,
+#expiredTasks {
+    border: 1px solid black;
+    min-height: 50px;
+    width: 150px;
+}
+
+#clock {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.wrapper__clock {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.wrapper__tasks {
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+}
+
+.wrapper__all {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+}
+
+.virtual {
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+}
+
+ul>p {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+li {
+    position: relative;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+li.urgent ::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 5px;
+    left: -16px;
+    width: 10px;
+    height: 10px;
+    background-color: red;
+    border-radius: 50%;
+}
+
+li.no-urgent ::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 5px;
+    left: -16px;
+    width: 10px;
+    height: 10px;
+    background-color: green;
+    border-radius: 50%;
+}

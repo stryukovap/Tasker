@@ -1,14 +1,14 @@
 // debugger;
-import Task from '/task.js';
-import Clock from './clock.js';
-import Schema from './VirtualDom.js'
+import Task from './lib/task.js';
+import Clock from './lib/clock.js';
+import Schema from './lib/virtualDom.js'
 
 var arrTasks = [];
-for (var i = 1; i < 10; i++) {
+for (var i = 10; i < 20; i++) {
 	var title = 'testTitle' + i;
 	var description = 'testDescription' + i;
-	var start = `09/0${i}/2018 00:30:00`;
-	var end = `09/0${i}/2018 20:00:00`;
+	var start = `09/${i}/2018 00:30:00`;
+	var end = `09/${i}/2018 20:00:00`;
 	var urgent = i % 2 ? true : false;
 	arrTasks[i - 1] = new Task(title, description, urgent, start, end);
 }
