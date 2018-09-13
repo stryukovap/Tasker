@@ -1,5 +1,7 @@
-import Task from './task.js'
-export default function Schema(tasksInQueue,
+var Task = require('./task');
+module.exports = Schema;
+
+function Schema(tasksInQueue,
     todayTasks,
     weekTasks,
     expiredTasks) {

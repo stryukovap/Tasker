@@ -1,7 +1,8 @@
 // debugger;
-import Task from './lib/task.js';
-import Clock from './lib/clock.js';
-import Schema from './lib/virtualDom.js'
+var clearTag = require('./lib/clearTag');
+var Task = require('./lib/task');
+var Clock = require('./lib/clock');
+var Schema = require('./lib/schema');
 
 var arrTasks = [];
 for (var i = 10; i < 20; i++) {
@@ -18,7 +19,7 @@ var schema = new Schema('tasksInQueue',
 	'weekTasks',
 	'expiredTasks');
 var virtualCheck = setInterval(function () {
-	schema.cleanElements();
+	clearTag('app');
 	schema.update();
 	arrTasks.forEach(function (item) {
 		item.update();
@@ -28,6 +29,6 @@ var virtualCheck = setInterval(function () {
 	var appHtml = schema.insertInHtml();
 	app.innerHTML = appHtml.outerHTML;
 }, 1000)
-
+// debugger;
 var watch = new Clock('clock');
 watch.startTimer();

@@ -1,8 +1,8 @@
-import {
-	correctFirstZero
-} from './clock.js'
+var correctFirstZero = require('./correctFirstZero');
 
-export default function Task(title, description, urgent, start, end) {
+module.exports = Task;
+
+function Task(title, description, urgent, start, end) {
 	this.title = title;
 	this.description = description;
 	this.urgentTask = !!urgent;

@@ -1,21 +1,27 @@
-export default function Clock(idElement) {
+module.exports = Clock;
+var correctFirstZero = require('./correctFirstZero');
+
+function Clock(idElement) {
     this.hours = '';
     this.minutes = '';
     this.seconds = '';
     this.timeoutId = null;
     this.idElement = idElement;
 }
-Clock.prototype.correctFirstZero = function (item) {
-    if (item < 10) {
-        item = `0${item}`;
-    };
-    return item;
-}
+// Clock.prototype.correctFirstZero = function (item) {
+//     if (item < 10) {
+//         item = `0${item}`;
+//     };
+//     return item;
+// }
 Clock.prototype.update = function () {
     var now = new Date();
-    this.hours = this.correctFirstZero(now.getHours());
-    this.minutes = this.correctFirstZero(now.getMinutes());
-    this.seconds = this.correctFirstZero(now.getSeconds());
+    // this.hours = this.correctFirstZero(now.getHours());
+    // this.minutes = this.correctFirstZero(now.getMinutes());
+    // this.seconds = this.correctFirstZero(now.getSeconds());
+    this.hours = correctFirstZero(now.getHours());
+    this.minutes = correctFirstZero(now.getMinutes());
+    this.seconds = correctFirstZero(now.getSeconds());
 }
 Clock.prototype.startTimer = function () {
     var self = this;
@@ -37,9 +43,10 @@ Clock.prototype.insertTimeForHtml = function () {
     var timeForHtml = `<p>${this.formatedTime()}</p>`;
     clockDiv.innerHTML = timeForHtml;
 }
-export function correctFirstZero(item) {
-    if (item < 10) {
-        item = `0${item}`;
-    };
-    return item;
-};
+// export function correctFirstZero(item) {
+// function correctFirstZero(item) {
+//     if (item < 10) {
+//         item = `0${item}`;
+//     };
+//     return item;
+// };
